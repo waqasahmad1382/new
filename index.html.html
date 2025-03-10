@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak Special</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+
+        /* 3D Balloons */
+        .balloon {
+            width: 100px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #ff5959;
+            position: absolute;
+            animation: float 5s infinite ease-in-out;
+            cursor: pointer;
+        }
+
+        .balloon:before {
+            content: "Eid Mubarak";
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        /* 3D Floating Animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(15deg);
+            }
+            100% {
+                transform: translateY(0) rotate(-15deg);
+            }
+        }
+
+        /* General Popup Style */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 1000;
+            font-size: 24px;
+            color: #333;
+            animation: fadeIn 1s forwards;
+        }
+
+        /* Fade-In effect for popups */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Styles for Close Button */
+        .close-button {
+            background-color: #ff5959;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .close-button:hover {
+            background-color: #d84d4d;
+        }
+
+        /* Image Styles */
+        .gift-image {
+            width: 100px;
+            margin: 10px;
+            animation: scaleUp 2s ease-in-out infinite alternate;
+        }
+
+        /* Scaling effect for images */
+        @keyframes scaleUp {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+
+        /* Background and overall page styling */
+        .background {
+            width: 100%;
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .special-message {
+            font-size: 32px;
+            color: #5a5a5a;
+            margin-top: 10px;
+        }
+
+        .floating-image {
+            position: absolute;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        /* Styling for gift basket popup */
+        .gift-popup img {
+            width: 250px;
+            margin: 15px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="background">
+    <!-- 3D Balloons -->
+    <div class="balloon" id="balloon1" style="left: 50px; top: 150px;"></div>
+    <div class="balloon" id="balloon2" style="left: 250px; top: 250px;"></div>
+    <div class="balloon" id="balloon3" style="left: 450px; top: 200px;"></div>
+
+    <!-- Eid Mubarak Popup -->
+    <div id="eidPopup" class="popup">
+        <p>Click here to continue!</p>
+        <button class="close-button" onclick="showGiftBasket()">Continue</button>
+    </div>
+
+    <!-- Gift Basket Popup -->
+    <div id="giftPopup" class="popup">
+        <h2>This is for the most beautiful Lady</h2>
+        <div class="image-container">
+            <img src="https://via.placeholder.com/150?text=Dress" class="gift-image" alt="Dress">
+            <img src="https://via.placeholder.com/150?text=Bangles" class="gift-image" alt="Bangles">
+            <img src="https://via.placeholder.com/150?text=Slippers" class="gift-image" alt="Slippers">
+            <img src="https://via.placeholder.com/150?text=Flowers" class="gift-image" alt="Flowers">
+            <img src="https://via.placeholder.com/150?text=Teddy+Bear" class="gift-image" alt="Teddy Bear">
+        </div>
+        <button class="close-button" onclick="showGirlfriendImages()">See yourself</button>
+    </div>
+
+    <!-- Girlfriend's Images Popup -->
+    <div id="girlfriendPopup" class="popup">
+        <h2>See these lovely photos of my girlfriend</h2>
+        <div class="image-container">
+            <img src="https://via.placeholder.com/200" alt="Girlfriend Image 1" class="floating-image">
+            <img src="https://via.placeholder.com/200" alt="Girlfriend Image 2" class="floating-image">
+            <img src="https://via.placeholder.com/200" alt="Girlfriend Image 3" class="floating-image">
+        </div>
+        <p class="special-message">I love you so much! Eid Mubarak to the love of my life.</p>
+        <button class="close-button" onclick="finalMessage()">Close</button>
+    </div>
+</div>
+
+<script>
+    // Function to show the Eid Mubarak Popup
+    document.getElementById("balloon1").onclick = function() {
+        showPopup('eidPopup');
+    };
+    document.getElementById("balloon2").onclick = function() {
+        showPopup('eidPopup');
+    };
+    document.getElementById("balloon3").onclick = function() {
+        showPopup('eidPopup');
+    };
+
+    function showPopup(id) {
+        document.getElementById(id).style.display = 'block';
+    }
+
+    // Show Gift Basket popup after clicking "Continue"
+    function showGiftBasket() {
+        document.getElementById("eidPopup").style.display = 'none';
+        document.getElementById("giftPopup").style.display = 'block';
+    }
+
+    // Show Girlfriend's photos after clicking "See yourself"
+    function showGirlfriendImages() {
+        document.getElementById("giftPopup").style.display = 'none';
+        document.getElementById("girlfriendPopup").style.display = 'block';
+    }
+
+    // Show the final message
+    function finalMessage() {
+        alert("Wishing you a blessed Eid full of happiness and love. Always remember, you are special!");
+        window.close(); // You can change this to any redirect if you want
+    }
+</script>
+
+</body>
+</html>
